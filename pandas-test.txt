@@ -54,4 +54,21 @@ print(df["price"].sum())
 print(df["date(例)"].min())
 print(df["date(例)"].max())
 
-○
+◯データ型確認
+df.dtypes
+
+◯object型からdatetime型に変更　（年月列作成）
+df["date"] = pd.datetime(df["date"] )
+df["month"] = df["date"] .dt.strftime("%Y%m")
+df[["date","month"]].head()
+
+◯月別集計
+df.groupby("month").sum()["price(例)"]
+
+○まとめたい列が複数ある場合の項目別集計　
+（例）月別、商品別集計
+　df.groupby(["month","item"]).sum()[["price","quantity"]]
+
+○ピボットテーブル集計
+pd.pivot_table(df, index='item', columns='month', values=['price', 'quantity'], aggfunc='sum')
+
