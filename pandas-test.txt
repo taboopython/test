@@ -4,32 +4,33 @@ import pandas as pd
 ◯csv読み込み
 df = pd.read_csv('xxxxx.csv')
 
-〇pandas done
-・同ヘッダ縦結合　df3 = df.append(def2)
-
-〇pandas issue 
-・月毎の台数集計 
-・期間指定台数 sum
-・custamize
+〇同ヘッダ縦結合　
+df3 = df.append(def2)
 
 ◯欠損値確認
 df.isnull().sum()
 
-
 ◯df概要確認
 df.head()
 
-◯データ結合concat
+◯データ結合(concat)
 df = pd.concat([df_1, df_2], ignore_index=True)
-appendとの違いは、concatはリスト型でDataFrameを渡すので、２つ以上の複数のDataFrameをまとめて結合することができます。
+appendとの違いは、concatはリスト型でDataFrameを渡すので、
+２つ以上の複数のDataFrameをまとめて結合することができます。
 https://ai-inter1.com/pandas-dataframe_union/
 
 ◯データ結合（append)　ユニオン
 DataFrame1.append(DataFrame2, ignore_index=True/False)
-引数ignore_indexでは、元のDataFrameのインデックスを破棄して新たに振りなおす場合、Trueを指定し、元のインデックスを継承する場合はFalseを指定します。何も指定しないとFalseになります。
-ignore_indexについては、元々のDataFrameのインデックスが連番で振ってあるのであれば、新たに振りなおせるようTrueに設定する方が良いです。
- 
-また元のDataFrameのインデックスがProduct IDなど、そのデータをユニークに特定する情報を持つ列に対して設定されているのであれば、そのままのインデックスを使えるようFalseに設定すれば良いです。
+引数ignore_indexでは、元のDataFrameのインデックスを破棄して
+新たに振りなおす場合、Trueを指定し、元のインデックスを継承す
+る場合はFalseを指定します。何も指定しないとFalseになります。
+ignore_indexについては、元々のDataFrameのインデックスが連番で
+振ってあるのであれば、新たに振りなおせるようTrueに設定する方
+が良いです。
+また元のDataFrameのインデックスがProduct IDなど、そのデータを
+ユニークに特定する情報を持つ列に対して設定されているのであれば、
+そのままのインデックスを使えるようFalseに設定すれば良いです。
+https://ai-inter1.com/pandas-dataframe_union/
 
 ◯行数確認
 print(len(df))
