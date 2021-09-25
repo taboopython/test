@@ -53,3 +53,5 @@ print(df["price"].sum())
 ◯ 期間範囲確認   期間があるものは確認すると良い
 print(df["date(例)"].min())
 print(df["date(例)"].max())
+
+○
