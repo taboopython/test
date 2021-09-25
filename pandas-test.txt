@@ -7,6 +7,9 @@ df = pd.read_csv('xxxxx.csv')
 〇同ヘッダ縦結合　
 df3 = df.append(def2)
 
+◯統計量確認
+df.describe()
+
 ◯欠損値確認
 df.isnull().sum()
 
@@ -40,3 +43,13 @@ join_df = pd.merge(df1, df2[["x", "y", "z"]], on="x", how="left")
 ジョインキー　を　x として、merge 引数に主軸のdf および、追加するdf2行項目のx,y,zを引数に、yzを主軸df1を左に配置しジョインする
 
 ◯必要なデータの作成
+(例）合計列の作成
+df["price"] = df["quantity"] * df["item_price"]
+
+◯集計
+print(df["price"].sum())
+※できるなら検算しておく
+
+◯ 期間範囲確認   期間があるものは確認すると良い
+print(df["date(例)"].min())
+print(df["date(例)"].max())
