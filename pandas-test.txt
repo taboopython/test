@@ -72,8 +72,59 @@ df.groupby("month").sum()["price(例)"]
 ◯ピボットテーブル集計
 pd.pivot_table(df, index='item', columns='month', values=['price', 'quantity'], aggfunc='sum')
 
+○ピボットテーブルをdfに変換
+df2 = pd.pivot_table(df, index='item', columns='month', values=['price', 'quantity'], aggfunc='sum')
+df2.head()
+
 ◯総行数確認・属性タイプ・非null個数確認
 df.info()
 
 ◯カテゴリ確認・カテゴリ別個数確認
 df["header-koumoku"].value_counts()
+
+◯ヒストグラムで可視化
+%matplotlib inline
+import matplotlib.pyplot as plt
+df.hist(bins=50, figsize=(20,15))
+plt.show()
+
+◯font 表示設定
+df.head().style.set_table_attributes('style="font-size: 17px"')
+
+◯出力行設定
+import pandas as pd
+ #現在の最大表示行数の出力
+pd.get_option("display.max_rows")
+ #最大表示行数の指定（ここでは50行を指定）
+pd.set_option('display.max_rows', 50)    #最初に定義しておくと良い
+　　　　　　　
+◯データフレームの保存
+joblib.dump(df, './sample.pkl')
+joblib.dumpという関数を利用して、データフレームをファイルとして保存できる。 上記の場合、.pyファイルを実行、もしくはjupyter-notebookを起動したカレントディレクトリにファイルが保存される。
+
+◯データフレームの読み込み
+df2 = joblib.load('./sample.pkl')
+
+◯元df と保存df＝df2の検証
+df == df2
+
+◯エクセルの読み込み
+　pd.reae_excel("///.xls")
+      ※シリアル値のpythonとエクセルの違いに注意　
+      　シリアル値の意味がわからない場合は要検索
+
+◯小文字を大文字に変換
+df.str.upper()
+
+◯空欄の半角から全角変換
+df.str.replace(" ","　")
+
+　→特定行のみであれば
+　　df["a"] = df["a"].df.str.replace(" ","　")　でOK
+
+○特定値をキーにソート
+df.sort_values(by=["a"], ascending=True)
+
+○ユニークデータの検証
+print(pd.unique(df["a"]))　　　　　内容確認
+print(len(pd.unique(df["a"])))     数確認
