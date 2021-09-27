@@ -65,12 +65,15 @@ df[["date","month"]].head()
 ◯月別集計
 df.groupby("month").sum()["price(例)"]
 
-○まとめたい列が複数ある場合の項目別集計　
+◯まとめたい列が複数ある場合の項目別集計　
 （例）月別、商品別集計
 　df.groupby(["month","item"]).sum()[["price","quantity"]]
 
-○ピボットテーブル集計
+◯ピボットテーブル集計
 pd.pivot_table(df, index='item', columns='month', values=['price', 'quantity'], aggfunc='sum')
 
+◯総行数確認・属性タイプ・非null個数確認
+df.info()
+
 ◯カテゴリ確認・カテゴリ別個数確認
-housing["ocean_proximity"].value_counts()
+df["header-koumoku"].value_counts()
