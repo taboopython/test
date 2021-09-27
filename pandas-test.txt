@@ -72,3 +72,5 @@ df.groupby("month").sum()["price(例)"]
 ○ピボットテーブル集計
 pd.pivot_table(df, index='item', columns='month', values=['price', 'quantity'], aggfunc='sum')
 
+◯カテゴリ確認・カテゴリ別個数確認
+housing["ocean_proximity"].value_counts()
