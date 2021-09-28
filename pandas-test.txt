@@ -128,3 +128,14 @@ df.sort_values(by=["a"], ascending=True)
 ○ユニークデータの検証
 print(pd.unique(df["a"]))　　　　　内容確認
 print(len(pd.unique(df["a"])))     数確認
+
+
+○行列転換
+df = df.T
+print(df)
+
+元のオブジェクト自体を変更
+元のオブジェクト自体を変更するinplaceのような引数は用意されていない。
+新たなオブジェクトを生成したくない場合は元のオブジェクト自体に代入すればよい。
+（参考）
+https://note.nkmk.me/python-pandas-t-transpose/
