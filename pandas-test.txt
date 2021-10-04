@@ -118,7 +118,6 @@ df.str.upper()
 
 ◯空欄の半角から全角変換
 df.str.replace(" ","　")
-
 　→特定行のみであれば
 　　df["a"] = df["a"].df.str.replace(" ","　")　でOK
 
@@ -129,7 +128,6 @@ df.sort_values(by=["a"], ascending=True)
 print(pd.unique(df["a"]))　　　　　内容確認
 print(len(pd.unique(df["a"])))     数確認
 
-
 ○行列転換
 df = df.T
 print(df)
@@ -139,3 +137,81 @@ print(df)
 新たなオブジェクトを生成したくない場合は元のオブジェクト自体に代入すればよい。
 （参考）
 https://note.nkmk.me/python-pandas-t-transpose/
+
+〇指定行削除
+ex1501.drop(ex1501.index[[0,1,2,3,4,6]])
+10.3 追加
+〇指定行削除
+ex1501.drop(ex1501.index[[0,1,2,3,4,6]])
+ 
+〇列削除
+df.frop(columns='1st')
+ 
+〇列複数削除
+ex1501.drop(ex1501.columns[[0,1,2,3,4,6]],axis=1)    ##cf defaultはaxis=0　（行の意味）
+ 
+※dropメソッドの引数にinplace=Trueを加えるとdf自体を更新
+ 
+〇
+1-2行目を削除する場合です。
+dataDelete = data.drop(range(1, 3))
+ 
+https://it-ojisan.tokyo/pandas-range-row-delete/
+〇
+ $ cat sample.py 
+#!/usr/bin/env python3
+# coding: UTF-8
+import pandas as pd
+data = pd.read_csv('in.txt', names=('id', 'value'))
+print(data)
+print("\n1行目を削除")
+dataDelete = data.drop(1)
+print(dataDelete)
+print("\n0-1行目を削除")
+dataDelete = data.drop(range(2))
+print(dataDelete)
+print("\n1-2行目を削除")
+dataDelete = data.drop(range(1, 3))
+print(dataDelete)
+print("\n0-1行目以外を削除")
+dataDelete = data.iloc[range(2), :]
+print(dataDelete)
+print("\n先頭の2行以外を削除")
+dataDelete = data.head(2)
+print(dataDelete)
+print("\n最後の2行以外を削除")
+dataDelete = data.tail(2)
+print(dataDelete)
+ 
+〇add columns list 
+list = ["time2","temp2"]
+df.columns=list
+df
+ 
+2.データ読み込み後
+現在ついている列名を何に変更するかを、columnsの後に辞書型で指定する
+ 
+#変更前のデータフレーム名をdfとする
+df = df.rename(columns={'A':'id', 'B':'gender', 'C':'generation'})
+ 
+行をインデックスに指定して読み込み
+何も指定せずread_csvで読み込むと、行番号を自動的に連番で振ってくれるが、
+csvファイル中に行のインデックスに該当する列がある場合は、それを指定することもできる。
+ 
+df = read_csv("csvへのパス", index_col="インデックスにする列名")　　　　　　　　　　OK
+ 
+〇読み込み時に、➀ヘッダー指定、⓶インデックス指定、➂削除指定
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
+ex1501test = pd.read_excel("/notebooks/workspace/pastdata/201501.xls",header=6,index_col="日付")
+ex1501test = ex1501test.drop(ex1501test.index[[32,33,34,35,36,37]])
+ 
+〇複数のつのcsvを読取、編集実施、df保存、合算
+ 
+〇dump data to csv
+dump_data.to_csv("dump_data.csv", index=False)
+ 
+〇新規列追加　※全ての行に指定dataを反映する
+（df[“onaji”]=99）
+ 
+ 
