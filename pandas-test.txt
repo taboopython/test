@@ -214,4 +214,11 @@ dump_data.to_csv("dump_data.csv", index=False)
 〇新規列追加　※全ての行に指定dataを反映する
 （df[“onaji”]=99）
  
+○データの大きさ確認
+　df.shape
  
+○応用　抽出　　 cf.kaggle
+　左から何番目までのcolumnsにおいて、data-typeが int64,float64のものをすべて定義
+　num_cols = [col for col in trn.coumns[:24] if trn[col].dtype in ['int64', 'float64']]
+　trn[num_cols].describe()
+
