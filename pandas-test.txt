@@ -222,3 +222,8 @@ dump_data.to_csv("dump_data.csv", index=False)
 　num_cols = [col for col in trn.coumns[:24] if trn[col].dtype in ['int64', 'float64']]
 　trn[num_cols].describe()
 
+○応用　抽出　カテゴリ
+for col in cat_cols:
+                         uniq = np.unique(trn[col].astype(str))
+                         print('-' * 50)
+                         print('# col {}, n_uniq {}, uniq {}'.format(col, len(uniq), uniq))
