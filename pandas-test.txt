@@ -227,3 +227,28 @@ for col in cat_cols:
                          uniq = np.unique(trn[col].astype(str))
                          print('-' * 50)
                          print('# col {}, n_uniq {}, uniq {}'.format(col, len(uniq), uniq))
+
+○指定行数を抽出
+https://prograshi.com/language/python/python_pandas_read_csv/
+先頭から読み込む行数を指定する方法
+オプションにnrows=整数を記述
+行数が膨大にある時に、中身を確認する場合などに便利
+
+▼例：nrows=3　
+　上から3行目まで読み込む。
+
+import pandas as pd
+df = pd.read_csv('~/desktop/test.csv', nrows=3)
+df
+
+○ファイルへの保存(path_or_buf)
+path_or_bufに保存先のファイルパスを指定することで保存できる。
+
+df.to_csv("sample01.csv")
+
+○保存時ヘッダー、インデックスありなし指定: 引数header, index
+https://note.nkmk.me/python-pandas-to-csv/
+ヘッダー（列名、pandas.DataFrameのcolumns）、インデックス（行名、pandas.DataFrameのindex）の
+ありなしは引数header, indexにTrue or Falseで指定する。
+df.to_csv('data/dst/to_csv_out_header_index.csv', header=False, index=False)
+
