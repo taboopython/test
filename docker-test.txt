@@ -388,6 +388,19 @@ docker run -d -t --name=analysis2 -v /mnt/320gbssd/:/notebooks -p 8000:8000 tabo
 
 
 -----------------------------------------------------------------------------------------
-◯
-◯バック
-docker container run --name mynginx2 -d -p 8082:80 nginx:1.9.15-alpine
+◯ nginxの展開
+  docker container run -p 8080:80 nginx
+
+◯バックグラウンドでcontainer実行　-d
+  docker container run --name mynginx2 -d -p 8082:80 nginx:1.9.15-alpine
+  ※-n により、コンテナ名の重複を避け、-pで[8082]の箇所を変更すれば複数同時に実行可能
+
+○コンテナのbashを操作可能にする
+　docker container run -it nginx bash
+
+○コンテナ停止後に即破棄する
+　docker run -rm
+
+○コンテナ情報確認　(CPU使用率やメモリ使用率など)
+  docker stats
+  ※　-f "is-official=true" -f "stars=50" python 
