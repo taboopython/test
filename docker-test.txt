@@ -1,0 +1,393 @@
+4.イメージの作成
+修正したコンテナのCONTAIER IDを確認します。
+
+コンテナの確認
+$ doｄcker ps -a
+CONTAINER ID        IMAGE                COMMAND             CREATED  
+
+           STATUS                      PORTS               NAMES
+b10edb89cd05        kohei/httpd:ver1.0   "/bin/bash"         43 seconds ago      Exited (0) 12 seconds ago                       gloomy_khorana
+確認したら、$ docker commit -m "コメント" <コンテナID> <リポジトリ:タグ>でローカルリポジトリへコミットします。
+
+コンテナのコミット
+$ docker commit -m "edited container" b10edb89cd05 kohei/httpd:ver1.0
+02607c25ed22c085a8e4964c91406baa911f194265db5d4ddfd44a2f96e799ec
+完了したら再度$ docker imagesでIMAGE IDを確認します。
+
+コンテナイメージの確認
+$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+kohei/httpd         ver1.0              02607c25ed22        5 seconds ago       264.3 MB
+すぐに確認すればCREATEDが数秒前という記載になっています。また、コミットする前に確認したIMAGE IDは異なるIDになっています。
+
+5.コンテナのpush
+ローカルリポジトリへコミットが完了したらDockerHubへpushします。
+
+DockerHubへpush
+$ docker push kohei/httpd:ver1.0
+The push refers to a repository [docker.io/kohei/httpd] (len: 1)
+02607c25ed22: Pushed
+4cf71c080937: Image already exists
+e87afdecef01: Image already exists
+13bab7291cec: Image already exists
+d3bf674be7aa: Image already exists
+ver1.0: digest: sha256:fb10c3626b1fc732c314efc132a29f7ee37c52176547a076c72553a97eaee949 size: 9116
+
+
+
+■go lang 環境
+　https://hodalog.com/how-to-build-golang-dev-environment/
+
+　docker image pull golang:latest
+　docker container run -dt -v $(pwd):/go/src --name golang_dev golang:latest
+　docker container exec -it golang_dev /bin/bash
+　cd /go/src/
+
+test
+docker container run -dt -p 8080:8080 -v $(pwd):/go/src --name golang_dev golang:latest
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+　mkdir hello
+　touch hello.go
+・ホストIPの調べ方
+    hostname -I
+
+・docker build .
+    docker run -p 8888:8888 -v /home/hello・・・・/docker_build:/work --name my-lab 02c1eb9cee0d
+
+docker run -it --rm --name continuumio-anaconda3 continuumio/anaconda3 /bin/bash
+
+    docker commit コンテナ名　イメージ名
+　docker commit testcontainer ubuntu:latest
+　リポジトリ名＝イメージ名
+
+■タグ名変更
+　docker tag 旧タグ名　新タグ名　→　保存される
+
+■push
+　docker push taboopython/my-first-repo:tagname
+■container化
+    docker commit コンテナ名　イメージ名
+　docker commit testcontainer ubuntu:latest
+　リポジトリ名＝イメージ名
+
+■タグ名変更
+　docker tag 旧タグ名　新タグ名　→　保存される
+
+■push
+　docker push taboopython/my-first-repo:tagname
+
+■container化
+    docker commit コンテナ名　イメージ名
+　docker commit testcontainer ubuntu:latest
+　リポジトリ名＝イメージ名
+
+■タグ名変更
+　docker tag 旧タグ名　新タグ名　→　保存される
+
+■push
+　docker push taboopython/my-first-repo:tagname
+
+■docker hub
+$ docker login
+　　　Login with your Docker ID to push and pull images from Docker Hub. If you 　　　don't have a Docker ID, head over to https://hub.docker.com to create one.
+　　　Username:
+
+■■■docker pull hello-world:latest
+　
+　docker images で今手元にあるDocker imageのリストを確認できます．
+
+　コンテナ実行したらそのままbashを起動させるということですね．
+　(bash　についてはこちらの記事をご参考ください．) 
+
+■ドッカー内に入る
+　$docker run -it {IMAGE名:TAG名} bashこの形はよく使うので覚えておくと
+　
+■docker-compose up -d --build
+  docker exec -it python python qiitatest.py
+
+■docker  立ち上げ
+　　docker build
+　$ docker-compose build
+　docker-compose up
+　docker-compose.ymlに書かれた依存関係をもとに、よしなにイメージ
+　を元にしてコンテナの作成と起動してくれる。
+　イメージはdocker-compose buildで作成する必要があります。
+
+■docker run it 1394a1d7124f :init /bin/sh
+
+■console.input
+   docker-compose run --rm scraping app/scraping/by_selenium.py
+
+docker-compose build
+　docker-compose.ymlの内容に基づいてイメージを作成する
+
+■docker停止
+　docker stop コンテナID
+
+■docker消去
+　docker rm  コンテナID
+
+■イメージ消去
+　docker rmi  IMGE ID
+
+  docker-compose down
+  sudo docker run -it ubuntu bash
+
+■
+docker pull jupyter/datascience-notebook
+
+■ホーム（デスクトップ）
+   /home/hellofromeizo
+
+■Docker
+   https://qiita.com/phorizon20/items/57277fab1fd7aa994502
+
+■イメージ作成
+   docker pull ubuntu:latest
+
+■環境作成
+   vi Dockerfile
+
+■ビルド
+   docker build . -t hoge/fuga:1.0
+
+■イメージの確認
+   docker images
+
+
+■イメージ立ち上げ
+   docker run -it hoge/fuga:1.0 /bin/bash
+
+$ vi app.py
+atom ○○.py
+
+以上の確認が終わったら、exitしてコンテナからログアウトしましょう。
+
+★★★　久々にやる時要参照
+$ docker ps -a
+    停止中のコンテナにログインするには、まずdocker start <コンテナ名>　
+で起動し、docker exec -it <コンテナ名> /bin/bashでログインすることが
+　出来ます。
+
+    docker rm <コンテナ名>などでこまめに消すか、もしくはdocker runの際に--rmオプションをつけてログアウトと同時に自動的に消えるようにすると良いですね。
+
+    まずはマウントする用のフォルダを作り、そこの先ほどのapp.pyを移動します。
+
+$ mkdir vol
+$ mv app.py vol/
+
+   docker run -it -p 5000:5000 -v $(pwd)/vol:/home hoge/fuga:1.0 /bin/bash
+
+   root@79cc27644e44:/# 
+
+   https://thinkit.co.jp/article/9701
+
+■raspberrypi
+   ps aux | grep docker
+
+■apache起動
+   docker run -d httpd
+
+■docker container run -t -python 9000:8080 gihyodocker/echo:latest
+
+■stop させる時
+    docker container stop $(docker container ls -q)
+
+■イメージビルド
+　docker image build -t example/echo:latest .
+
+■イメージ確認
+　docker image ls
+
+■コンテナストップ
+　$ docker container stop $(docker container ls --filter "ancestor=○タグ名○" -q)
+
+■Docker コマンド集
+　https://qiita.com/gounx2/items/c63a04f36c4bfd9621ff
+
+docker-compose build
+　docker-compose.ymlの内容に基づいてイメージを作成する
+
+$ docker-compose build
+　docker-compose up
+　docker-compose.ymlに書かれた依存関係をもとに、よしなにイメージを元にしてコンテナの作成と起動してくれる。
+イメージはdocker-compose buildで作成する必要があります。
+
+$ docker-compose up
+docker-compose down
+
+■ｌｓ
+:~$ source venv/bin/activate
+(venv) :~$ docker ps
+
+
+・テスト
+　docker image pull gihyodocker/echo:latest
+　docker container run -t -p 9000:8080 gihyodocker/echo:latest
+
+　→ストップさせる
+　docker stop $(docker container ls -q)
+
+・イメージビルド　Dockerfile と実行ファイル（この例ではmain.go）
+　sudo  docker image build -t example/echo:latest .
+
+     →　f オプションにより、Dockerfile  を指定できる。
+　 sudo docker build -f Dockerfile2 -t example/echo:latest .
+
+・ストップ
+　docker container stop $(docker container ls --filter"ancestor=example/echo" -q)
+
+・ポートフォワーディング  コンテナ実行
+　 docker container run -d -p 9000:8080 example/echo:latest
+
+    →　 d　オプションは　バックブラウンドで実行
+
+・コンテナ実行　普通の実行
+　docker container run example/echo:latest
+
+ホスト確認
+・curl http://localhost:9000
+
+・ポート確認
+　docker container ls
+
+・ストップ
+　docker container stop
+
+・コンテナ一括削除
+　docker rm `docker ps -a -q`c
+
+
+・イメージ一括削除
+　docker rmi `docker images -q`
+
+・イメージ個別削除
+　docker rmi　id
+
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+■分析環境構築　python jupyter matplot
+https://www.fabrica-com.co.jp/techblog/technology/994/
+・docker pull ubuntu:18.04
+
+docker images
+　REPOSITORY TAG IMAGE ID CREATED SIZE
+　ubuntu 18.04 a2a15febcdf3 2 weeks ago 64.2MB
+
+docker run -it --name=analysis_try ubuntu:18.04 /bin/bash
+
+apt-get install -y tzdata build-essential curl git libbz2-dev libffi-dev liblzma-dev libncurses5-dev libncursesw5-dev libpq-dev libreadline-dev libsqlite3-dev libssl-dev llvm make tk-dev unzip vim wget xz-utils zlib1g-dev
+
+・apt-get update -y && apt-get upgrade -y
+
+・pyenvでpythonをインストール
+　# cd /root
+　# mkdir -p .pyenv
+　# mkdir -p local/bin/python-3.6.9
+　# git clone https://github.com/pyenv/pyenv.git .pyenv/
+　# ./.pyenv/plugins/python-build/install.sh
+　# /usr/local/bin/python-build -v 3.6.9 ./local/bin/python-3.6.9
+　# echo 'export PATH="$HOME/local/bin/python-3.6.9/bin:$PATH"' 　>> ~/.bashrc
+　# source .bashrc
+　# python -V
+　Python 3.6.9
+
+・コンテナ作成
+　Dockerfileからイメージを作成
+　docker build -t ubuntu-analysis .
+
+・コンテナrun
+    docker run -d -t --name=analysis -v $PWD/notebooks:/notebooks -p 8000:8000 ubuntu-analysis
+
+★■tensor gpu test
+docker exec -it tensorflow bash
+
+
+■tensorflow テスト
+・tensortest   build     dir cd tensortest
+   docker build --pull -t tensorflow-model-server -f Dockerfile .
+
+■tensorflow & opencv  実行環境
+・docker build -t tensor-docker:0.1 .
+
+・docker run --rm -v `pwd`:/home/tensor-docker -it tensor-docker:0.1 /bin/bash
+   
+■datascientist-100 knocks
+$ git clone [Repository URL] ※
+$ cd 100knocks-preprocess
+$ docker-compose up -d --build
+
+■keras
+
+最新
+　docker pull taboopython/keras:1.1
+→前docker pull taboopython/keras:1.0
+
+git clone https://github.com/qqwweee/keras-yolo3.git
+
+cd keras-yolo3
+
+git clone https://github.com/taboopythoerastest.git
+
+pip install -r requirements.txt
+
+wget https://pjreddie.com/media/files/yolov3.weights
+
+python convert.py yolov3.cfg yolov3.weights model_data/yolo.h5
+
+docker run -it -d --name=keras -p 7777:7777 -v $PWD/keras:/keras dd429057cc84 bash
+
+docker run -it -d --name=keras -p 7777:7777 -v $PWD/keras:/keras 9ac638e919a7 bash
+
+
+docker cp sample5.png keras:/keras/keras-yolo3
+
+python yolo_video.py --image
+
+python yolo_video.py --input ファイル名.mp4
+
+
+
+■yolo 2
+docker run -p 80:80 registry.gitlab.com/sleepless-se/imageai_object_detection_api
+そして、こちらのコマンドでAPIに画像を投げます。
+
+※ path/to/image.jpg は自分の画像のパスに置き換えてください。
+
+curl -X POST -F image=/home/hellofromeizo/kerastest/sample1.png http://localhost/predict
+
+
+■analysis 
+  docker restart analysis
+  
+  localhost:8000  →
+
+■
+docker run --gpus all nvidia/cuda:10.1-base-ubuntu18.04 nvidia-smi
+
+docker run --gpus all -it  --name tensorflow-gpu -v $PWD/dml:/dmltest -p 8888:8888 tensorflow/tensorflow:latest-gpu-py3-jupyter
+
+docker run --gpus all -it -d --name=tensorflow-gpu -v $PWD/dml:/tf/dmltest -p 8888:8888 tensorflow/tensorflow:latest-gpu-jupyter
+
+docker run --gpus all -it -d --name=tensorflow-gpu114 -v /home/saboten/workspace/dml:/tf/dmltest -p 8888:8888 tensorflow/tensorflow:latest-gpu-jupyter
+
+
+・コンテナ作成
+　Dockerfileからイメージを作成
+　docker build -t ubuntu-analysis .
+
+※　requirements.txt がない場合は、docker hub から
+docker pull taboopython/analysisforrepo:latest
+
+https://hub.docker.com/layers/107402714/taboopython/analysisforrepo/latest/images/sha256-5cef9030ae650a051177578a589852f1da24dfb70f443326cd7f718cd58f2756?context=repo
+
+docker run -d -t --name=analysis -v /home/saboten/workspace/analysis/notebooks:/notebooks -p 8000:8000 ubuntu-analysis
+
+
+docker run -d -t --name=analysis2 -v /mnt/320gbssd/:/notebooks -p 8000:8000 taboopython/analysisforrepo:latest
+
+
+-----------------------------------------------------------------------------------------
+◯
+◯バック
+docker container run --name mynginx2 -d -p 8082:80 nginx:1.9.15-alpine
