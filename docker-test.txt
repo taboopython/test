@@ -404,3 +404,27 @@ docker run -d -t --name=analysis2 -v /mnt/320gbssd/:/notebooks -p 8000:8000 tabo
 ○コンテナ情報確認　(CPU使用率やメモリ使用率など)
   docker stats
   ※　-f "is-official=true" -f "stars=50" python 
+
+○pythonコンテナ立ち上げ＆スペシャルファイル(空実行ファイル)
+docker container run --name c2env1_app_base -d python:3.7.5-slim tail -f /dev/nul 
+※tail -f /dev/nulで　何もしないコンテナとして作成　（kubernetesでよく使う）
+
+○bash に入らずexecコマンドのみで操作してモジュールインストール
+docker container exec c2env1_app_base pip install flask==1.1.1
+
+○ホストローカルディレクトリファイルをコピーしてrunしているコンテナにペースト
+docker container cp server.py c2env1_app_base:/
+ ※　docker exec -it c2env1_app_base bash で　コピー＆ペーストできていることが確認できる
+
+○docker image を更新
+コンテナを起動してから現在までに、コンテナ起動時に指定したDockerイメージに対して行った変更を全て反映した新しいDockerイメージを作成
+(例)docker container commit c2env1_app_base c2env1_app
+
+○環境変数付き起動
+docker container run --name c2env1_app -p 8081:80 -d -e MESSAGE="Hello Docker Env saboten" -e PORT=80 c2env_app python -u /server.py
+※環境変数はコンテナ起動後には変更できない。変更するためには新しいコンテナを作り直す必要あり。
+※stop,startし直してセットすることもできない。
+
+○container のIPを確認
+docker container exec c2env1_app hostname -i
+172.17.0.2
