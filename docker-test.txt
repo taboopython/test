@@ -428,3 +428,14 @@ docker container run --name c2env1_app -p 8081:80 -d -e MESSAGE="Hello Docker En
 ○container のIPを確認
 docker container exec c2env1_app hostname -i
 172.17.0.2
+
+○docker ホストへの接続確認
+　(docker versionをリモートで確認)
+　docker -H ssh://○○@... version
+
+○ポートフォワーディングを確認
+docker container run -d --rm -p 8080:80 nginx:1.17.6-alpine
+
+docker container ls --format='table{{.ID}}/t{{.Names}}/t{{.Ports}}'
+
+docker container port e868af537b28
