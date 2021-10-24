@@ -439,3 +439,21 @@ docker container run -d --rm -p 8080:80 nginx:1.17.6-alpine
 docker container ls --format='table{{.ID}}/t{{.Names}}/t{{.Ports}}'
 
 docker container port e868af537b28
+
+○ネットワークリスト表示
+docker network ls
+
+○ネットワーク作成
+docker network create ////
+
+docker network create -d //// ////
+
+○コンテナをネットワークに接続
+docker container run -d --rm --network bridge1 -p 8080:80 nginx:1.17.6-alpine
+
+○ネットワークに属するコンテナを確認
+docker network inspect bridge
+
+○ネットワーク削除
+docker network rm bridge1
+
