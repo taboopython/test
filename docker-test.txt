@@ -457,3 +457,24 @@ docker network inspect bridge
 ○ネットワーク削除
 docker network rm bridge1
 
+○python環境docker container
+docker container run --name base -it -p 8080:80 python:3.7.5-slim bash
+
+○仮想マシンホストに転送
+scp -P 2222 -r server.py ・・・・・@・・・・・:/home/・・・
+
+○仮想マシンホストからコンテナへコピー
+docker container cp server.py base:/
+
+○コンテナからコマンド実行元にファイルをコピー
+docker container cp base:/etc/hosts ./
+
+○
+172.17.0.2
+
+○タグ付け
+docker image tag c2img1_app ○○○/c2img1_app:v1.0
+
+○docker-DockerHubへpush
+docker image push taboopython/c2img1_app:v1.0
+
