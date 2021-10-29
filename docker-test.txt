@@ -433,6 +433,12 @@ docker container exec c2env1_app hostname -i
 　(docker versionをリモートで確認)
 　docker -H ssh://○○@... version
 
+◯鍵の生成
+ssh-keygen -t rsa -m PEM -q -N ""
+
+◯鍵のコピー　
+ssh-copy-id ///@////
+
 ○ポートフォワーディングを確認
 docker container run -d --rm -p 8080:80 nginx:1.17.6-alpine
 
@@ -478,3 +484,6 @@ docker image tag c2img1_app ○○○/c2img1_app:v1.0
 ○docker-DockerHubへpush
 docker image push taboopython/c2img1_app:v1.0
 
+○docker compose 
+（compose.ymlがあるディレクトリで）
+docker compose up -d --build
