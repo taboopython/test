@@ -475,9 +475,6 @@ docker container cp server.py base:/
 ○コンテナからコマンド実行元にファイルをコピー
 docker container cp base:/etc/hosts ./
 
-○
-172.17.0.2
-
 ○タグ付け
 docker image tag c2img1_app ○○○/c2img1_app:v1.0
 
