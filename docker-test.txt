@@ -484,3 +484,58 @@ docker image push taboopython/c2img1_app:v1.0
 ○docker compose 
 （compose.ymlがあるディレクトリで）
 docker compose up -d --build
+
+○現時点でのコンテナの状態をDockerイメージとして出力
+　コンテナに対して行った設定や更新したファイルを含め、コンテナ内の全ファイルと合わせて新しいDockerイメージを作成。
+　例えば、公式なCentOSのDockerイメージを独自にカスタマイズして、個人用のCentOSイメージを作成する場合などに利用できる
+　docker commit [オプション] [コンテナ] [リポジトリ[:タグ]]
+
+○リモート　　docker-compose
+docker-compose -H tcp://192.168.56.102 up -d
+
+-----------------------------
+■wordpress project
+
+ネットワークとmysql コンテナを作成
+docker network create -d bridge wp-net
+
+docker container run -d --network wp-net --name mysql --mount source=mysqlvolume,target=/var/lib/mysql --mount type=bind,source=/Users/yuichi/mysqlbackup,target=/mysqlbackup -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wordpress -e MYSQL_PASSWORD=password mysql:5.7.28
+
+
+コンテナ作成
+docker container run -d --network wp-net -p 8080:80 -e WORDPRESS_DB_HOST=mysql:3306 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=password --name wordpress wordpress:5.2.3-php7.3-apache
+
+バックアップ取得　
+docker container exec mysql bash -c "mysqldump u root -ppassword -A > mysqlbackup/20200101.sql"
+
+docker container exec mysql cat /mysqlbackup/20200101.sql
+
+
+コンテナとボリューム削除　バックアップ　破棄テスト
+docker container stop mysql wordpress
+
+docker container rm mysql wordpress
+
+docker volume rm mysqlvolume
+
+mysql のコンテナ作成　バックアップ復旧
+docker container run -d --network wp-net --name mysql --mount source=mysqlvolume,target=/var/lib/mysql --mount type=bind,source=/Users/yuichi/mysqlbackup,target=/mysqlbackup -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wordpress -e MYSQL_PASSWORD=password mysql:5.7.28
+
+docker container exec mysql bash -c "mysql -u root -ppassword < /mysqlbackup/20200101.sql"
+
+wordpress のコンテナ作成
+docker container run -d --network wp-net -p 8080:80 -e WORDPRESS_DB_HOST=mysql:3306 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=password --name wordpress wordpress:5.2.3-php7.3-apache
+
+★★docker-compose インストール
+https://docs.docker.com/compose/install/
+
+■VM 容量追加
+https://masalib.hatenablog.com/entry/2017/07/21/220000
+
+■docker  コンテナ　イメージ　一括削除
+https://qiita.com/boiyama/items/9972601ffc240553e1f3
+
+docker rm -f `docker ps -a -q`
+
+docker rmi `docker images -q`
+
