@@ -1,0 +1,11 @@
+○ipadressを表示
+  ip a
+
+○hostnameを表示
+　hostname
+
+○ディレクトリの中身のみコピー
+cd -pR /mnt/320gbssd/docker-test/sample_code/chap6 /mnt/320gbssd/docker-kvs
+
+○パス設定
+echo 'export PATH=$PATH:~/.local/bin' >> ~/.bash_profile
