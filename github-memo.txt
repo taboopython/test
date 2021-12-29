@@ -95,3 +95,14 @@ git reset --hard b28aed5f422d73508fca84efae594a1658ceec4a
 
 ★　強制　push 
 git push -f origin master 
+
+
+■ git push 
+ パスワード認証からトークン入力認証に変更
+https://techback.info/github-password-authentication-to-token/
+
+■　git pull
+
+git pull origin master
+
+https://techacademy.jp/magazine/10274
