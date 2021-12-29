@@ -1,0 +1,97 @@
+
+★
+…or create a new repository on the command line
+echo "# scrape" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:taboopython/scrape.git
+git push -u origin main
+
+★
+…or push an existing repository from the command line
+git remote add origin git@github.com:taboopython/scrape.git
+git branch -M main
+git push -u origin main
+…or import code from another repository
+You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+git remote add origin git@github.com:taboopython/mod-coral.git
+
+git branch -M main
+
+git push -u origin main
+
+★
+コマンドを使いGitHubに登録するまでの流れ
+セットアップ
+まずは現在作業をしているディレクトリをgitで管理できるようにするためのセットアップを行います。このコマンドは管理したいディレクトリごとに初めの一回だけで大丈夫です。
+
+$ git init
+①作業ディレクトリ→ステージングエリア
+次は上で述べた"①作業ディレクトリからステージングエリアにファイルをあげる"部分を行います。
+ひとつずつファイルをaddしたいときは以下のコマンドを打ちます。
+
+/*ファイルをひとつずつあげたい場合*/
+$ git add ファイル名
+
+/*ファイルを一括してあげたい場合*/
+$ git add -A
+/*"-A"を使うことで作業ツリー内のファイルを全て追加することができます*/
+②ステージングエリア→ローカルリポジトリ
+ステージングエリアからローカルリポジトリへファイルを上げることを、コミット(commit)と言います。コマンドは以下になります。
+
+$ git commit -m "コミットメッセージ"
+/*コミットメッセージはどういった編集内容なのかわかりやすく書いておくと良い*/
+addしてステージングエリアにファイルをあげずコミットを行うと、"Changes not staged for commit:"と帰ってくるのできちんとaddしてからコミットを行うようにしましょう。
+
+③ローカルリポジトリ→リモートリポジトリ
+今回はリモートリポジトリにGitHubを使います。
+※まだGitHubを登録できていない場合は登録から行いましょう。以下の記事を参考に登録をしてから次に進みます。
+登録の詳しい内容はこの記事では割愛させていただきます。
+GitHub入門 〜アカウントを作成する方法
+
+使用するコマンドは
+
+$ git push
+なのですが、最初にGitHubに上げる際にはこのままではうまくいきません。
+
+ec2-user:~/environment/pictgram (master) $ git push
+fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add <name> <url>
+
+and then push using the remote name
+
+    git push <name>
+このようになります。リモートのリポジトリはどこやねんと言われてしまいました。
+一番最初にリモートにアップロードする場合はきちんと宛先を指定しましょうね、という話です。
+
+ではGithub上で作成したリモートリポジトリのURLをコピーしてきて先ほどのコマンドの続きに貼り付けます。
+この際、リモートリポジトリの名前をつける必要があるのですが、この名前は一般的に"origin"という名前を使用します。コマンドは以下のようになります。
+
+$ git remote add origin https://github.com/Toshimatu/pictgram.git
+これでセッティングは終了。これでpushする準備ができたので改めてpushをしましょう。
+なお、最初のpushは以下のように指定します。2回目以降は$ git pushのみでpush可能になります。
+
+$ git push -u origin master
+これにてGitHubにファイルの登録ができました！
+実際にGitHubに登録されているか確認して、作成したリポジトリにコードが反映されていれば終了です。
+これでようやくGitHubが使えるようになりました。ですが初回の登録をしただけで、まだ押さえておかなければいけないことはあります。続きは別記事かこの記事にて書いていこうと思います。（もしくは調べてみてください。）
+
+git remote add origin https://github.com/taboopython/kerastest.git
+
+taboopython/kerastest
+
+https://github.com/taboopython/kerastest.git
+
+★新しいブランチを作成
+git checkout -b <------->
+
+
+★git version 戻す
+git reset --hard b28aed5f422d73508fca84efae594a1658ceec4a
+
+★　強制　push 
+git push -f origin master 
